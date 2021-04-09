@@ -4,13 +4,13 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import { Text, View } from 'react-native';
 
+import Home from './screens/Home'
+
 import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
   return (
-    <View>
-      <Text>HELLO WORLD</Text>
-    </View>
+    <Home />
 
   );
 };
