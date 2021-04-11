@@ -2,22 +2,22 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
 import Home from './screens/Home'
+import Login from './screens/Login'
 
-import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
   return (
-    <Home />
+    <Provider store={store}>
+      {/* <NavigationContainer> */}
+        <Login />
+      {/* </NavigationContainer> */}
+      
+    </Provider>
 
   );
 };
-  //   // <Provider store={store}>
-  //     {/* <NavigationContainer> */}
-  
-  //     {/* </NavigationContainer> */}
-  //  {/* </Provider>  */}
 
 export default App;

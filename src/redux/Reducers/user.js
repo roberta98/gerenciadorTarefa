@@ -1,12 +1,32 @@
+import { LOGIN_SUCCESS,	LOGIN_ERROR, LOGIN_LOADING } from "../Actions/userActionsType"
 
-const initialState = {
-    user: []
+const initialStateUser = {
+	loginAccess: [],
+	loadingLogin: false,
+	errorMessage: ''
 };
 
-export const user = (state = initialState, action) => {
-    // switch(action.type){
-
-    //     default:
-    //     return state; 
-    // }
+export const user = (state = initialStateUser, action) => {
+	switch(action.type){
+		case LOGIN_LOADING:
+			return {
+				...state,
+				loadingLogin: true
+			}
+		case LOGIN_SUCCESS:
+			return {
+				...state,
+				loadingLogin: false,
+				loginAccess : action.payload,
+				errorMessage: ''			
+			}
+		case LOGIN_ERROR: 
+			return {
+				...state,
+				loginAccess : [],
+				errorMessage: action.payload
+			}
+		default:
+		return state; 
+	}
 }

@@ -1,11 +1,14 @@
-import thunk from 'redux-thunk';
+import { createStore } from 'redux';
+import { combineReducers } from 'redux';
 import { taskManger } from './Reducers/taskManager';
 import { user } from './Reducers/user';
-import { applyMiddleware, createStore, combineReducers} from 'redux';
 
-// const rootReducer = combineReducers({
-//     user: user,
-//     tarefas: taskManger,
-// });
+const rootReducer = combineReducers({
+    user: user,
+    // tarefas: taskManger,
+});
 
-// export default createStore(rootReducer,applyMiddleware(thunk));
+const store = createStore(rootReducer)
+
+
+export default store
