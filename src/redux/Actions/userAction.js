@@ -17,7 +17,8 @@ const errorLogin = errorMessage => ({
 
 export const loginAction = (params) => dispatch => {
 	dispatch(loadingLogin())
-	login(params, (isSuccessful, res) => {
+	login(params)
+	.then((isSuccessful, res) => {
 		if(isSuccessful){
 			dispatch(successLogin(res.payload))
 		}else{

@@ -7,7 +7,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from './screens/Home'
 import Login from './screens/Login'
 
-
 const App = () => {
   return (
     <Provider store={store}>
