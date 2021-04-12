@@ -1,14 +1,17 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import thunk from 'redux-thunk';
-import { taskManger } from './Reducers/taskManager';
-import { user } from './Reducers/user';
+import { createStore } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage';
+import rootReducer from './reducers';
 
-const rootReducer = combineReducers({
-    user: user,
-    // tarefas: taskManger,
-});
+const persistConfig = {
+	key: 'root',
+	storage: AsyncStorage,
+};
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+const store = createStore(persistedReducer);
 
-export default store
+persistStore(store);
+
+export default store;

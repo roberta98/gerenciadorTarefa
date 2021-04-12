@@ -1,22 +1,48 @@
 import 'react-native-gesture-handler';
-import React from 'react';
-import { Provider } from 'react-redux';
-import store from './redux/store';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
-
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Login from './screens/Login';
 import Home from './screens/Home'
-import Login from './screens/Login'
+import SideBar from './components/SideBar';
 
-const App = () => {
+const Drawer = createDrawerNavigator();
+
+const App = props => {
+
+  const [isLogged, setisLogged] = useState(props.user.logginOn)
+  useEffect(() => {
+    if(isLogged){
+      setisLogged(!isLogged)
+    }
+  }, [isLogged])
+
+function renderHome() {
   return (
-    <Provider store={store}>
-      {/* <NavigationContainer> */}
-        <Login />
-      {/* </NavigationContainer> */}
-      
-    </Provider>
-
+    <Drawer.Navigator drawerContent={() => <SideBar />}>
+      <Drawer.Screen name={'Menu'} component={Home} />
+    </Drawer.Navigator>
   );
-};
+}
 
-export default App;
+function renderLogin(){
+  return <Login />
+}
+
+  const authenticated = props.user.logginOn;
+  return (
+    <NavigationContainer>
+      {isLogged && renderHome()}
+      {!isLogged && renderLogin()}
+    </NavigationContainer>
+  );
+}
+
+function mapStateToProps(state) {
+	return {
+		logged: state.user,
+	};
+}
+
+export default connect(mapStateToProps)(App);

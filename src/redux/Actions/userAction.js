@@ -15,14 +15,12 @@ const errorLogin = errorMessage => ({
 	payload: errorMessage
 })
 
-export const loginAction = (params) => dispatch => {
+export const loginAction = params => dispatch => {
 	dispatch(loadingLogin())
-	login(params)
-	.then((isSuccessful, res) => {
-		if(isSuccessful){
+	let res = login(params)
+		if(res){
 			dispatch(successLogin(res.payload))
 		}else{
 			dispatch(errorLogin(res.payload))
 		}
-	})
 }

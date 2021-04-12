@@ -9,7 +9,6 @@ const index = props => {
 	const [userName, setUserName] = useState('')
 	const [password, setPassword] = useState('')
 
-
 	function renderInput(name, changeName, type,  text){
 		return (
 			<TextInput 
@@ -22,9 +21,10 @@ const index = props => {
 		)		
 	}
 
-	let data = {
-		userName, 
-		password
+	function goHome(){
+		if(props.user.logginOn){
+			props.navigation.navigate('Home')
+		}
 	}
 
 	return (
@@ -36,7 +36,10 @@ const index = props => {
 			{renderInput(userName, setUserName, false, 'Digite seu usuário')}
 			{renderInput(password, setPassword, true, 'Digite sua senha')}
 			<TouchableOpacity 
-				onPress={() => props.login.loginAction(data)} 
+				onPress={() => {
+					props.login.loginAction({userName, password})
+					console.log(props.user)
+				}} 
 				style={localStyle.button}
 			>
 				<Text style={localStyle.textButton}>Entrar</Text>
@@ -44,6 +47,7 @@ const index = props => {
 		</View>
 	)
 }
+
 
 const localStyle = StyleSheet.create({
 	container: {

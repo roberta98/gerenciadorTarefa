@@ -3,11 +3,12 @@ import { LOGIN_SUCCESS,	LOGIN_ERROR, LOGIN_LOADING } from "../Actions/userAction
 const initialStateUser = {
 	loginAccess: [],
 	loadingLogin: false,
+	logginOn: false,
 	errorMessage: ''
 };
 
-export const user = (state = initialStateUser, action) => {
-	switch(action.type){
+export const user = (state = initialStateUser, {type, payload}) => {
+	switch(type){
 		case LOGIN_LOADING:
 			return {
 				...state,
@@ -17,16 +18,19 @@ export const user = (state = initialStateUser, action) => {
 			return {
 				...state,
 				loadingLogin: false,
-				loginAccess : action.payload,
+				loginAccess : payload,
+				logginOn: true,
 				errorMessage: ''			
 			}
 		case LOGIN_ERROR: 
 			return {
 				...state,
 				loginAccess : [],
-				errorMessage: action.payload
+				errorMessage: payload
 			}
 		default:
 		return state; 
 	}
 }
+
+console.log(user)
