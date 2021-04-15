@@ -1,17 +1,6 @@
-import { createStore } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist';
-import AsyncStorage from '@react-native-community/async-storage';
-import rootReducer from './reducers';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducers from './Reducers'
 
-const persistConfig = {
-	key: 'root',
-	storage: AsyncStorage,
-};
+export default createStore(reducers, applyMiddleware(thunk));
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const store = createStore(persistedReducer);
-
-persistStore(store);
-
-export default store;

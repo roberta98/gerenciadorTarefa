@@ -39,6 +39,7 @@ const index = props => {
 				onPress={() => {
 					props.login.loginAction({userName, password})
 					console.log(props.user)
+					console.log(userName, password)
 				}} 
 				style={localStyle.button}
 			>
@@ -88,7 +89,7 @@ const localStyle = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({
-	user: state.user
+	user: state.userReducer
 })
 
 const mapDispatchToProps = dispatch => ({

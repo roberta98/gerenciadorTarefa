@@ -5,32 +5,31 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Login from './screens/Login';
 import Home from './screens/Home'
-import SideBar from './components/SideBar';
 
 const Drawer = createDrawerNavigator();
 
 const App = props => {
 
-  const [isLogged, setisLogged] = useState(props.user.logginOn)
+  const [isLogged, setisLogged] = useState(false) //props.user.logginOn ? false : 
+  console.log(props.user)
   useEffect(() => {
     if(isLogged){
       setisLogged(!isLogged)
     }
   }, [isLogged])
 
-function renderHome() {
-  return (
-    <Drawer.Navigator drawerContent={() => <SideBar />}>
-      <Drawer.Screen name={'Menu'} component={Home} />
-    </Drawer.Navigator>
-  );
-}
+  function renderHome() {
+    return (
+      <Drawer.Navigator drawerContent={() => <SideBar />}>
+        <Drawer.Screen name={'Menu'} component={Home} />
+      </Drawer.Navigator>
+    );
+  }
 
-function renderLogin(){
-  return <Login />
-}
+  function renderLogin(){
+    return <Login />
+  }
 
-  const authenticated = props.user.logginOn;
   return (
     <NavigationContainer>
       {isLogged && renderHome()}
@@ -41,7 +40,7 @@ function renderLogin(){
 
 function mapStateToProps(state) {
 	return {
-		logged: state.user,
+		user: state.userReducer,
 	};
 }
 

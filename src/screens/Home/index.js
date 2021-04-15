@@ -15,7 +15,7 @@ const index = props => {
 	)   
 }
 const mapStateToProps = state => ({
-	user: state.user
+	user: state.userReducer
 })
 // const mapDispatchToProps = dispatch => ({})
 
